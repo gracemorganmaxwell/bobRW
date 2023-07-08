@@ -1,9 +1,20 @@
-import { Link, routes } from '@redwoodjs/router'
+import { useState } from 'react'
 
-const ButtonLink = () => (
-  <Link to={routes.contactUs()}>
-    <button>Book a Quote</button>
-  </Link>
-)
+import { routes } from '@redwoodjs/router'
+
+const ButtonLink = () => {
+  const [colour, setColour] = useState('blue')
+
+  return (
+    <a href={routes.contactUs()} target="_blank" rel="noopener noreferrer">
+      <button
+        style={{ backgroundColor: colour }}
+        onClick={() => setColour('green')}
+      >
+        Book a Quote
+      </button>
+    </a>
+  )
+}
 
 export default ButtonLink

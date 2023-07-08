@@ -11,7 +11,7 @@ import {
   DatetimeLocalField,
 } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
-
+import { Toaster } from '@redwoodjs/web/dist/toast'
 const ContactPage = () => {
   const [formType, setFormType] = useState('')
   const onSubmit: SubmitHandler<formValues> = (data) => {
@@ -93,6 +93,7 @@ const ContactPage = () => {
           <Submit>Submit</Submit>
         </Form>
       </div>
+      <Toaster />
     </>
   )
 }

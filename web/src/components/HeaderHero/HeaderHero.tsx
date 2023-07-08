@@ -6,10 +6,11 @@ const HeaderHero = () => {
   return (
     <header>
       <nav>
-        <h1>Bob&apos;s Backyard</h1>
         <div>
-          <Link to={routes.home()} />
-          <img src={logo} alt="logo" />
+          <Link to={routes.home()}>
+            <h1>Bob&apos;s Backyard</h1>
+            <img src={logo} alt="logo" />
+          </Link>
         </div>
         <ul>
           <li>
