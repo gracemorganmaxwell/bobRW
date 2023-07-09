@@ -1,26 +1,30 @@
 import { useState } from 'react'
 
+import { gql } from '@apollo/client'
+
 import {
   TextField,
   TextAreaField,
   Submit,
   Form,
-  SubmitHandler,
   FieldError,
   EmailField,
   DatetimeLocalField,
+  SubmitHandler,
 } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
-import { Toaster } from '@redwoodjs/web/dist/toast'
-const ContactPage = () => {
-  const [formType, setFormType] = useState('')
-  const onSubmit: SubmitHandler<formValues> = (data) => {
-    if (formType === 'onsite free quote' && !data.when) {
-      alert('Please select a date and time for the visit.')
-      return
+import { Toaster, toast, useToaster } from '@redwoodjs/web/toast'
+
+const CREATE_CONTACT_MUTATION = gql`
+  mutation CreateContactMutation($input: CreateContactInput!) {
+    createContact(input: $input) {
+      id
     }
-    console.log(data)
   }
+`
+const Contact = () => {
+  const [formType, setFormType] = useState('')
+  const Toaster = useToaster()
 
   interface formValues {
     contactType: string
@@ -30,12 +34,20 @@ const ContactPage = () => {
     address: string
     contactNumber: string
     message: string
-    when?: string
+    when?: string // This is now an optional field
+  }
+
+  const onSubmit: SubmitHandler<formValues> = async (data) => {
+    if (formType === 'onsite free quote' && !data.when) {
+      toast.error('Please select a date and time for the visit.')
+      return
+    }
+    createContact({ variables: { input: data } })
   }
 
   return (
     <>
-      <MetaTags title="Contact" description="Contact page" />
+      <MetaTags title="Contact" description="Contact" />
 
       <div>
         <h1>Contact & Booking form:</h1>
@@ -62,15 +74,15 @@ const ContactPage = () => {
               <DatetimeLocalField name="when" />
             </>
           )}
-          <label htmlFor="first name">First Name:</label>
-          <TextField name="first name" validation={{ required: true }} />
-          <FieldError name="first name" />
-          <label htmlFor="last name">Last Name:</label>
-          <TextField name="last name" validation={{ required: true }} />
-          <FieldError name="last name" />
+          <label htmlFor="firstName">First Name:</label>
+          <TextField name="firstName" validation={{ required: true }} />
+          <FieldError name="firstName" />
+          <label htmlFor="lastName">Last Name:</label>
+          <TextField name="lastName" validation={{ required: true }} />
+          <FieldError name="lastName" />
           <label htmlFor="email">Email:</label>
           <EmailField
-            name="email address"
+            name="email"
             validation={{
               required: true,
               pattern: {
@@ -79,13 +91,13 @@ const ContactPage = () => {
               },
             }}
           />
-          <FieldError name="email address" />
-          <label htmlFor="home address">Address:</label>
-          <TextField name="home address" validation={{ required: true }} />
-          <FieldError name="home address" />
-          <label htmlFor="contact-number">Contact Number:</label>
-          <TextField name="contact-number" validation={{ required: true }} />
-          <FieldError name="contact-number" />
+          <FieldError name="email" />
+          <label htmlFor="address">Address:</label>
+          <TextField name="address" validation={{ required: true }} />
+          <FieldError name="address" />
+          <label htmlFor="contactNumber">Contact Number:</label>
+          <TextField name="contactNumber" validation={{ required: true }} />
+          <FieldError name="contactNumber" />
           <label htmlFor="message">Message:</label>
           <TextAreaField name="message" validation={{ required: true }} />
           <FieldError name="message" />
@@ -93,9 +105,9 @@ const ContactPage = () => {
           <Submit>Submit</Submit>
         </Form>
       </div>
-      <Toaster />
     </>
   )
 }
 
-export default ContactPage
+export default Contact
+
