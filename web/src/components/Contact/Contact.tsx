@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import { gql } from '@apollo/client'
 
+import './contact.css'
+
 import {
   TextField,
   TextAreaField,
@@ -12,8 +14,9 @@ import {
   DatetimeLocalField,
   SubmitHandler,
 } from '@redwoodjs/forms'
+import { useMutation } from '@redwoodjs/web'
 import { MetaTags } from '@redwoodjs/web'
-import { Toaster, toast, useToaster } from '@redwoodjs/web/toast'
+import { Toaster, toast } from '@redwoodjs/web/toast'
 
 const CREATE_CONTACT_MUTATION = gql`
   mutation CreateContactMutation($input: CreateContactInput!) {
@@ -22,9 +25,12 @@ const CREATE_CONTACT_MUTATION = gql`
     }
   }
 `
+
 const Contact = () => {
   const [formType, setFormType] = useState('')
-  const Toaster = useToaster()
+  const [createContact, { loading, error }] = useMutation(
+    CREATE_CONTACT_MUTATION
+  )
 
   interface formValues {
     contactType: string
@@ -42,6 +48,13 @@ const Contact = () => {
       toast.error('Please select a date and time for the visit.')
       return
     }
+    try {
+      await createContact({ variables: { input: data } })
+      toast.success('Contact created successfully')
+    } catch (err) {
+      toast.error('Failed to create contact')
+    }
+    console.log('Form data:', data)
     createContact({ variables: { input: data } })
   }
 
@@ -49,14 +62,18 @@ const Contact = () => {
     <>
       <MetaTags title="Contact" description="Contact" />
 
-      <div>
+      <div className="contact-container">
         <h1>Contact & Booking form:</h1>
         <h3>
           Book a free onsite quote, or get in touch with any queries you and we
           will be touch.
         </h3>
 
-        <Form onSubmit={onSubmit} config={{ mode: 'onBlur' }}>
+        <Form
+          onSubmit={onSubmit}
+          config={{ mode: 'onBlur' }}
+          className="contact-form"
+        >
           <label htmlFor="contactType">Form Type:</label>
           <select
             required
@@ -102,12 +119,15 @@ const Contact = () => {
           <TextAreaField name="message" validation={{ required: true }} />
           <FieldError name="message" />
           <br />
-          <Submit>Submit</Submit>
+          <Submit disabled={loading}>
+            {loading ? 'Submitting...' : 'Submit'}
+          </Submit>
         </Form>
+        {error && <p>{error.message}</p>}
       </div>
+      <Toaster />
     </>
   )
 }
 
 export default Contact
-

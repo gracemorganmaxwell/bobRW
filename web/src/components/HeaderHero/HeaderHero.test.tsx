@@ -1,14 +1,31 @@
-import { render } from '@redwoodjs/testing/web'
+import { render, screen } from '@redwoodjs/testing/web'
 
 import HeaderHero from './HeaderHero'
-
-//   Improve this test with help from the Redwood Testing Doc:
-//    https://redwoodjs.com/docs/testing#testing-components
 
 describe('HeaderHero', () => {
   it('renders successfully', () => {
     expect(() => {
       render(<HeaderHero />)
     }).not.toThrow()
+  })
+
+  it('renders the logo', () => {
+    render(<HeaderHero />)
+    const logo = screen.getByAltText('logo')
+    expect(logo).toBeInTheDocument()
+  })
+
+  it('renders the navigation links', () => {
+    render(<HeaderHero />)
+    const homeLink = screen.getByText('Home')
+    const contactLink = screen.getByText('Contact')
+    expect(homeLink).toBeInTheDocument()
+    expect(contactLink).toBeInTheDocument()
+  })
+
+  it('renders the header title', () => {
+    render(<HeaderHero />)
+    const title = screen.getByText("Bob's Backyard")
+    expect(title).toBeInTheDocument()
   })
 })

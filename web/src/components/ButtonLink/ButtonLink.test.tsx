@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from '@redwoodjs/testing/web'
+import { render, screen } from '@redwoodjs/testing/web'
 
 import ButtonLink from './ButtonLink'
 
@@ -11,16 +11,10 @@ describe('ButtonLink', () => {
       render(<ButtonLink />)
     }).not.toThrow()
   })
+
   test('Button link opens in a new tab', () => {
     render(<ButtonLink />)
     const button = screen.getByText('Book a Quote')
     expect(button.closest('a')).toHaveAttribute('target', '_blank')
-  })
-
-  test('Button changes color on click', () => {
-    render(<ButtonLink />)
-    const button = screen.getByText('Book a Quote')
-    fireEvent.click(button)
-    expect(button).toHaveStyle('background-color: green')
   })
 })

@@ -1,0 +1,82 @@
+.portfolio {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.portfolio h1 {
+  text-align: relative;
+  color: black;
+  font-size: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  color: black;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+}
+
+.card p {
+  color: black;
+  font-size: 1rem;
+}
+
+.cta-button:hover {
+  background: #8bc34a;
+}
+
+@media (min-width: 320px) {
+  .portfolio h1 {
+    font-size: 2.5rem;
+  }
+  .card h2 {
+    font-size: 2rem;
+  }
+  .card p {
+    font-size: 1.25rem;
+  }
+
+}
+
+@media (min-width: 768px) {
+  .portfolio h1 {
+    font-size: 3rem;
+  }
+  .card h2 {
+    font-size: 2.5rem;
+  }
+  .card p {
+    font-size: 1.5rem;
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .portfolio h1 {
+    font-size: 3.5rem;
+  }
+  .card h2 {
+    font-size: 3rem;
+  }
+  .card p {
+    font-size: 1.75rem;
+  }
+
+}
