@@ -1,5 +1,3 @@
-import { ThemeProvider } from '@material-tailwind/react'
-
 import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 
