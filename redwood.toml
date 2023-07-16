@@ -10,7 +10,7 @@
   title = "Redwood Bob's Backyard"
   port = 8910
   apiProxyPath = "/.redwood/functions"
-  includeEnvironmentVariables = ["SUPABASE_URL", "SUPABASE_KEY"]
+  includeEnvironmentVariables = ["Database_URL"]
 [api]
   port = 8911
 [browser]
