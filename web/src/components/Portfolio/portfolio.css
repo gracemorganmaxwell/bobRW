@@ -1,3 +1,4 @@
+
 .portfolio {
   max-width: 1200px;
   margin: 0 auto;
@@ -7,7 +8,7 @@
 .portfolio h1 {
   text-align: relative;
   color: black;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .card {
@@ -16,6 +17,11 @@
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   margin-bottom: 1rem;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  background: #8bc34a;
 }
 
 .card h2 {
@@ -30,7 +36,7 @@
   display: block;
   margin-bottom: 1rem;
   border-radius: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #8bc34a;
 }
 
 .card p {
@@ -38,21 +44,19 @@
   font-size: 1rem;
 }
 
-.cta-button:hover {
-  background: #8bc34a;
-}
-
 @media (min-width: 320px) {
   .portfolio h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   .card h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .card p {
     font-size: 1.25rem;
   }
-
+  .card img {
+    width: 50%;
+  }
 }
 
 @media (min-width: 768px) {
@@ -65,7 +69,9 @@
   .card p {
     font-size: 1.5rem;
   }
-
+  .card img {
+    width: 75%;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -78,5 +84,7 @@
   .card p {
     font-size: 1.75rem;
   }
-
+  .card img {
+    width: 100%;
+  }
 }
