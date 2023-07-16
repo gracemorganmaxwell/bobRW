@@ -6,6 +6,7 @@
 # https://redwoodjs.com/docs/app-configuration-redwood-toml
 
 [web]
+  apiUrl = "/.netlify/functions"
   title = "Redwood Bob's Backyard"
   port = 8910
   apiProxyPath = "/.redwood/functions"
